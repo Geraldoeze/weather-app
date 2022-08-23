@@ -1,0 +1,27 @@
+.weather {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.weather__title {
+    margin: 1rem;
+    color: rgb(34, 118, 192);
+}
+
+label {
+    display: block;
+
+}
+
+input {
+    width: 60%;
+    height: 1.6rem;
+    margin: 0.6rem;
+}
+
+.weather__info {
+    background-color: rgba(219, 216, 216, 0.87);
+
+    padding: 3px;
+    box-shadow: rgba(0, 0, 0, 0.384) 0px 5px 15px;
+}
