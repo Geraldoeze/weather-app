@@ -1,11 +1,20 @@
 import './Weather.css'
+import { fetchApi } from '../utils/fetchApi';
+import { baseUrl } from '../utils/fetchApi';
 
 const Weather = () => {
+    
+
+    const fetchCity = async () => {
+        fetchApi(baseUrl)
+    }   
+    
+   
     return ( 
         <div className='weather'>
             <h1 className="weather__title">Weather App.</h1>
 
-            <form>
+            <form onSubmit={fetchCity}>
                 <label htmlFor='city'>Enter a location for weather information</label>
                 <input type='text' name='city' />
             </form>
