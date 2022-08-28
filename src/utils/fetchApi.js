@@ -1,5 +1,5 @@
 import axios from "axios";
-export const baseUrl = 'https://yahoo-weather5.p.rapidapi.com/weather?location=sunnyvale&format=json&u=f'
+export const baseUrl = 'https://yahoo-weather5.p.rapidapi.com/weather';
 
 
 export const fetchApi = async (url) => {
@@ -10,7 +10,7 @@ export const fetchApi = async (url) => {
         }
     })
         
-    return( data, console.log(data));
+    return data;
 } 
 
 
