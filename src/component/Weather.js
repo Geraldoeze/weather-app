@@ -1,31 +1,35 @@
 import React, {useState} from 'react'; 
 import './Weather.css'
 import { fetchApi, baseUrl } from '../utils/fetchApi';
-
+import LoadingIndicator from '../UI/LoadingIndicator';
 
 const Weather = () => {
     const [ location, setLocation ] = useState();    
     const [ items, setItems ] = useState(false);
     const [ data, setData ] = useState([]);
+    const [ loader, setLoader ] = useState(false);
 
     const InputChangeHandler = (e) => {
         e.preventDefault();
         setLocation(e.target.value)
+        setItems(false)
     }
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(location)
+        setLoader(true);
       try {
         const results = await fetchApi(`${baseUrl}?location=${location}&format=json&u=c`)
-        setItems(true)
         setData(results);
+        setLoader(false)
+        setItems(true)
       } catch (err) {
         console.log(err);
-    }
+      }
+      
     } 
 
-   
+   console.log(data)
     return ( 
         
         <div className='weather'>
@@ -36,6 +40,7 @@ const Weather = () => {
                 <input type='text' name='city' onChange={InputChangeHandler} />
             </form>
 
+        { loader && <LoadingIndicator/> }
             {items && (
 
             <div className="weather__info">
@@ -47,7 +52,7 @@ const Weather = () => {
                 <div>
                     <h5>{data.location.city}</h5>
                     <h5>{data.location.region} </h5>
-                    <div>Weather condition</div>
+                    <div>Condition</div>
                     <div>
                         <p>{data.current_observation.condition.text}</p>
                         <p>{data.current_observation.condition.temperature}&deg;C</p>
