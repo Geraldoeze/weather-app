@@ -3,6 +3,7 @@
 .weather__title {
     margin: 1rem;
     color: rgb(34, 118, 192);
+    font-weight:bold ;
 }
 
 label {

@@ -3,4 +3,5 @@
   font-family: Montserrat;
   max-width: 500px;
   margin: auto;
+  background-color: var(--gradient-bar);
 }
