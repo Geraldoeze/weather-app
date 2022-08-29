@@ -29,7 +29,6 @@ const Weather = () => {
       
     } 
 
-   console.log(data)
     return ( 
         
         <div className='weather'>
@@ -51,7 +50,7 @@ const Weather = () => {
 
                 <div>
                     <h5>{data.location.city}</h5>
-                    <h5>{data.location.region} </h5>
+                    <h5>{data.location.country} </h5>
                     <div>Condition</div>
                     <div>
                         <p>{data.current_observation.condition.text}</p>
