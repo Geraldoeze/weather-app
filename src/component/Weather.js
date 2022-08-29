@@ -25,9 +25,6 @@ const Weather = () => {
     }
     } 
 
-    // function check() {
-    //     data.length > 0 ?  
-    // }
    
     return ( 
         
@@ -35,7 +32,7 @@ const Weather = () => {
             <h1 className="weather__title">Weather App.</h1>
 
             <form onSubmit={submitHandler}>
-                <label htmlFor='city'>Enter a location for weather information</label>
+                <label htmlFor='city'>Enter city location for weather information</label>
                 <input type='text' name='city' onChange={InputChangeHandler} />
             </form>
 
@@ -48,12 +45,12 @@ const Weather = () => {
                 </div>
 
                 <div>
-                    <h5>City name: {data.location.city}</h5>
-                    <h5>City countrty: {data.location.region} </h5>
+                    <h5>{data.location.city}</h5>
+                    <h5>{data.location.region} </h5>
                     <div>Weather condition</div>
                     <div>
-                        <span>temp</span>
-                        <span>&deg;C</span>
+                        <p>{data.current_observation.condition.text}</p>
+                        <p>{data.current_observation.condition.temperature}&deg;C</p>
                     </div>
                 </div>
             </div>) }
