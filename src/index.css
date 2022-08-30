@@ -8,8 +8,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root {
-  --gradient-bar: linear-gradient(103.22deg, #93c8dd -13.86%, #c4ccca 99.55%);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+.app {
+  background-image: url('./assets/cold.jpg');
+   background-size: cover;
+   background-position: bottom;
+   transition: 0.4 ease-out;
+}
 
