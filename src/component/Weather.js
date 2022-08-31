@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import './Weather.css';
 import axios from "axios";
+import { getIcon } from "./getIcon";
 
 const api = {
     key: "b7d22a0e223b2e67998ce6bd1a6c59f7",
@@ -38,6 +39,13 @@ const Weather = () => {
         return `${day} ${date} ${month} ${year}`
     }
 
+    
+    function capitalize(str) {
+      // converting first letter to uppercase
+      const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+      return capitalized;
+    }
+
     return ( 
         <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app' : 'app cold') : 'app' } >
        
@@ -62,7 +70,10 @@ const Weather = () => {
                     <div className="temp">
                     {Math.round(weather.main.temp)}&deg;C
                     </div>
-                    <div className="weather">{weather.weather[0].main}</div> 
+                    <div className="weather">{capitalize(weather.weather[0].description)}</div> 
+                </div>
+                <div className="weather-icons">
+                    <img className="icon" src={getIcon(weather.weather[0].main)} alt="icon" />
                 </div>
             </div>
             ) : ('')}
