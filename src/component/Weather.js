@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import './Weather.css';
+import axios from "axios";
 
 const api = {
     key: "b7d22a0e223b2e67998ce6bd1a6c59f7",
@@ -7,6 +8,19 @@ const api = {
 }
 
 const Weather = () => {
+    const [query, setQuery] = useState("");
+    const [weather, setWeather] = useState({});
+
+    const search = event => { 
+        if (event.key === "Enter") {
+            axios.get(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+              .then(result => {
+                  setWeather(result);
+                  setQuery(''); 
+                  console.log(result);
+              });
+        }
+    }
 
     const dateBuilder = (d) => {
         let months = ["January", "February", "March", "April", "May", "June", "July",
@@ -23,6 +37,7 @@ const Weather = () => {
 
         return `${day} ${date} ${month} ${year}`
     }
+
     return ( 
         <main>
             <div className="search-box">
@@ -30,6 +45,9 @@ const Weather = () => {
                   type='text'
                   className="search-bar"
                   placeholder="Search..."
+                  onChange={e => setQuery(e.target.value)}
+                  value={query}
+                  onKeyPress={search}
                 />
             </div>
             <div className="location-box">
