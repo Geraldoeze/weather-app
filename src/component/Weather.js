@@ -17,7 +17,7 @@ const Weather = () => {
               .then(result => {
                   setWeather(result.data);
                   setQuery(''); 
-                  console.log(result.data);
+                  console.log(result.data)
               });
         }
     }
