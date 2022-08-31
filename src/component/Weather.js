@@ -15,9 +15,9 @@ const Weather = () => {
         if (event.key === "Enter") {
             axios.get(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
               .then(result => {
-                  setWeather(result);
+                  setWeather(result.data);
                   setQuery(''); 
-                  console.log(result);
+                  console.log(result.data);
               });
         }
     }
@@ -39,7 +39,9 @@ const Weather = () => {
     }
 
     return ( 
-        <main>
+        <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app' : 'app cold') : 'app' } >
+       
+          <main>
             <div className="search-box">
                 <input
                   type='text'
@@ -50,17 +52,23 @@ const Weather = () => {
                   onKeyPress={search}
                 />
             </div>
-            <div className="location-box">
-                <div className="location">Naija, NGR</div>
-                <div className="date">{dateBuilder(new Date())}</div>
-            </div>
-            <div className="weather-box">
-                <div className="temp">
-                    15&deg;C
+            {(typeof weather.main != "undefined") ? (
+            <div>
+                <div className="location-box">
+                    <div className="location">{weather.name}, {weather.sys.country}</div>
+                    <div className="date">{dateBuilder(new Date())}</div>
                 </div>
-                <div className="weather">Sunny</div> 
+                <div className="weather-box">
+                    <div className="temp">
+                    {Math.round(weather.main.temp)}&deg;C
+                    </div>
+                    <div className="weather">{weather.weather[0].main}</div> 
+                </div>
             </div>
-        </main>
+            ) : ('')}
+            
+          </main>
+        </div>
      );
 }
  
