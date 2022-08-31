@@ -91,3 +91,13 @@ main {
     font-weight: 700;
     text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
+
+.weather-icons {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.weather-icons .icons {
+    background: #fff;
+}

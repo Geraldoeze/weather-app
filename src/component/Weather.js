@@ -70,10 +70,10 @@ const Weather = () => {
                     <div className="temp">
                     {Math.round(weather.main.temp)}&deg;C
                     </div>
-                    <div className="weather">{capitalize(weather.weather[0].description)}</div> 
+                    <div className="weather">{capitalize(weather.weather[0].main)}</div> 
                 </div>
                 <div className="weather-icons">
-                    <img className="icon" src={getIcon(weather.weather[0].main)} alt="icon" />
+                    <img className="icon" src={getIcon(capitalize(weather.weather[0].description))} alt="icon" />
                 </div>
             </div>
             ) : ('')}
