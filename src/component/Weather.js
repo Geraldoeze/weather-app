@@ -12,9 +12,13 @@ const Weather = () => {
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
 
+
+// initial render when the page loads UseEffect and localStorage
+
     const search = event => { 
+        const city = query.trim()
         if (event.key === "Enter") {
-            axios.get(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+            axios.get(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
               .then(result => {
                   setWeather(result.data);
                   setQuery(''); 
