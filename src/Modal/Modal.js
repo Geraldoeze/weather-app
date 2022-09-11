@@ -1,8 +1,15 @@
-
+import React, {useState} from 'react';
 import './modal.css';
 
-const Modal = ({ handleClose, show }) => {
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+const Modal = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = ( ) => {
+      setShow(true);
+  }
+
+  const showHideClassName = show ? "modal display-none" : "modal display-block";
 
 
   return (

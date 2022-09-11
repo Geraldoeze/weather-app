@@ -35,10 +35,8 @@ const Weather = () => {
                 }
             })
             .catch(error => {
+                setModal(true);
                 console.log('error is', error)});
-            setModal(true)
-            
-           
         }
     }
 
@@ -79,7 +77,7 @@ const Weather = () => {
                   onKeyPress={search}
                 />
             </div>
-            {modal && <Modal show />}
+            {modal && <Modal />}
             {(typeof weather.main != "undefined") ? (
             
             <div>

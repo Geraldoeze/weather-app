@@ -19,7 +19,28 @@
   }
   
   .modal-main h2, p {
-   color: rgb(146, 31, 31)
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    color: rgb(146, 31, 31)
+  }
+
+  .modal-main button {
+      display: block;
+      margin: 0 auto;
+      border: none;
+      justify-content: center;
+      color: rgb(119, 8, 8);
+      height: 2.4rem;
+      width: 6rem;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px
+  }
+
+  .modal-main button:hover {
+    background-color: rgb(181, 205, 236);
+    color: rgba(0, 68, 255, 0.733);
   }
 
   .display-block {
