@@ -10,14 +10,18 @@
   
   .modal-main {
     position:fixed;
-    background: white;
+    background: rgb(189, 182, 182);
     width: 80%;
-    height: auto;
+    height: 20vh;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
   }
   
+  .modal-main h2, p {
+   color: rgb(146, 31, 31)
+  }
+
   .display-block {
     display: block;
   }

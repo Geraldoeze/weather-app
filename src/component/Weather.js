@@ -12,23 +12,33 @@ const api = {
 const Weather = () => {
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
-    const [ modal, setModal ] = useState(null);
+    const [modal, setModal] = useState(false);
 
 // initial render when the page loads UseEffect and localStorage
     useEffect(() => {
 // fetch city stored locally and 
     }, [])
 
-    const search = async event => { 
+    const search = event => { 
         const city = query.trim()
         if (event.key === 'Enter') {
-            try {
-            const result = await  axios.get(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
-            setWeather(result.data)
-            setQuery('')
-            } catch (err) {
-                setModal(err)
-            }
+            axios.get(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+            .then( response => {
+                console.log(response)
+                if (response.status === 200) {
+                    setWeather(response.data)
+                    setQuery('')
+                } else if (response.status === 404) {
+                    return Promise.reject('error 404')
+                } else {
+                    return Promise.reject('error  unknown')
+                }
+            })
+            .catch(error => {
+                console.log('error is', error)});
+            setModal(true)
+            
+           
         }
     }
 
@@ -64,13 +74,13 @@ const Weather = () => {
                   type='text'
                   className="search-bar"
                   placeholder="Search..."
-                  onChange={e => setQuery(e.target.value)}
+                  onChange={e => {setQuery(e.target.value) }}
                   value={query}
                   onKeyPress={search}
                 />
             </div>
-            {modal && <Modal show >{modal.message}</Modal>}
-            {/* {(typeof weather.main != "undefined") ? (
+            {modal && <Modal show />}
+            {(typeof weather.main != "undefined") ? (
             
             <div>
                 <div className="location-box">
@@ -88,7 +98,7 @@ const Weather = () => {
                 </div>
             </div>
             
-            ) : ('')} */}
+            ) : ('')}
             
           </main>
         </div>
