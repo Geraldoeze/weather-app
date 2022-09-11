@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import './Weather.css';
 import axios from "axios";
 import { getIcon } from "./getIcon";
+import Modal from '../Modal/Modal';
 
 const api = {
     key: "b7d22a0e223b2e67998ce6bd1a6c59f7",
@@ -11,19 +12,23 @@ const api = {
 const Weather = () => {
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
-
+    const [ modal, setModal ] = useState(null);
 
 // initial render when the page loads UseEffect and localStorage
+    useEffect(() => {
+// fetch city stored locally and 
+    }, [])
 
-    const search = event => { 
+    const search = async event => { 
         const city = query.trim()
-        if (event.key === "Enter") {
-            axios.get(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
-              .then(result => {
-                  setWeather(result.data);
-                  setQuery(''); 
-                  console.log(result.data)
-              });
+        if (event.key === 'Enter') {
+            try {
+            const result = await  axios.get(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
+            setWeather(result.data)
+            setQuery('')
+            } catch (err) {
+                setModal(err)
+            }
         }
     }
 
@@ -52,7 +57,7 @@ const Weather = () => {
 
     return ( 
         <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app' : 'app cold') : 'app' } >
-       
+        
           <main>
             <div className="search-box">
                 <input
@@ -64,7 +69,9 @@ const Weather = () => {
                   onKeyPress={search}
                 />
             </div>
-            {(typeof weather.main != "undefined") ? (
+            {modal && <Modal show >{modal.message}</Modal>}
+            {/* {(typeof weather.main != "undefined") ? (
+            
             <div>
                 <div className="location-box">
                     <div className="location">{weather.name}, {weather.sys.country}</div>
@@ -80,7 +87,8 @@ const Weather = () => {
                     <img className="icon" src={getIcon(capitalize(weather.weather[0].description))} alt="icon" />
                 </div>
             </div>
-            ) : ('')}
+            
+            ) : ('')} */}
             
           </main>
         </div>
