@@ -5,7 +5,7 @@ import { getIcon } from "./getIcon";
 import Modal from '../Modal/Modal';
 
 const api = {
-    key: "b7d22a0e223b2e67998ce6bd1a6c59f7",
+    key: process.env.REACT_APP_OPEN_API_KEY,
     base: "https://api.openweathermap.org/data/2.5/"
 }
 
@@ -13,13 +13,13 @@ const Weather = () => {
     const [query, setQuery] = useState("");
     const [weather, setWeather] = useState({});
     const [modal, setModal] = useState(false);
-
+console.log(api)
 // initial render when the page loads UseEffect and localStorage
     useEffect(() => {
 // fetch city stored locally and 
     const place = localStorage.getItem('location')
     if (place) {
-        axios.get(`${api.base}weather?q=${place}&units=metric&APPID=${api.key}`)
+        axios.get(`${api.base}weather?q=${place}&units=metric&APPID=${process.env.REACT_APP_OPEN_API_KEY}`)
         .then( response => {
             console.log(response)
             if (response.status === 200) {
