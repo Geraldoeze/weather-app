@@ -17,11 +17,25 @@ const Weather = () => {
 // initial render when the page loads UseEffect and localStorage
     useEffect(() => {
 // fetch city stored locally and 
-    }, [])
+    const place = localStorage.getItem('location')
+    if (place.length > 0) {
+        axios.get(`${api.base}weather?q=${place}&units=metric&APPID=${api.key}`)
+        .then( response => {
+            console.log(response)
+            if (response.status === 200) {
+                setWeather(response.data)
+                setQuery('')
+            }  else if (response.status === 404) {
+                localStorage.removeItem('location')
+            }
+        })
+    }
+}, [])
 
     const search = event => { 
         const city = query.trim()
         if (event.key === 'Enter') {
+            localStorage.setItem('location', city)
             axios.get(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
             .then( response => {
                 console.log(response)
