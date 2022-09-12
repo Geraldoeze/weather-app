@@ -18,7 +18,7 @@ const Weather = () => {
     useEffect(() => {
 // fetch city stored locally and 
     const place = localStorage.getItem('location')
-    if (place.length > 0) {
+    if (place) {
         axios.get(`${api.base}weather?q=${place}&units=metric&APPID=${api.key}`)
         .then( response => {
             console.log(response)
